@@ -19,16 +19,31 @@ public class FacturationRoulonsVehiculesVerts
         final String CHOIX_TROIS = "3. Afficher le nombre de véhicules hybrides et électriques loués";
         final String CHOIX_QUATRE = "4. Quitter le programme";
         
+        
 
         
         // Déclaration de variables
-        choix_
+        byte choixOption;
         
         // Affichage de résultat
         System.out.println(ENCADRE_TITRE);
         System.out.println(MESSAGE_BIENVENUE);
-        System.out.println(ENCADRE_TITRE);
+        System.out.println(ENCADRE_TITRE + "\n");
+        System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
+        System.out.print("\nEntrez votre choix : ");
+        choixOption = Clavier.lireByte();
+        
+            while(choixOption <= 0 || choixOption >= 5) {
+        
+            System.out.println("\nEntrez invalide !\n");
+        
+            System.out.printf("\n%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
+            System.out.print("\nEntrez votre choix : ");
+            choixOption = Clavier.lireByte();
+        
+    
         
         
+        }
     }
 }

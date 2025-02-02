@@ -25,6 +25,7 @@ public class FacturationRoulonsVehiculesVerts
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
         
         
+        
 
         
         // Déclaration de variables
@@ -33,9 +34,15 @@ public class FacturationRoulonsVehiculesVerts
         int voituresRestantesHybridesPetites = 12;
         int voituresLouesHybridesIntermediaires = 0;
         int voituresRestantesHybridesIntermediaires = 10;
-        int voituresRestantesHybridesGrandes = 8; // Assuming a value
-        int voituresRestantesElectriquesPetites = 6; // Assuming a value
-        int voituresRestantesElectriquesIntermediaires = 5; // Assuming a value
+        int voituresLouesHybridesGrandes = 0;
+        int voituresRestantesHybridesGrandes = 3;
+        int voituresLouesElectriquesPetites = 0;
+        int voituresRestantesElectriquesPetites = 11;
+        int voituresLouesElectriquesIntermediaires = 0;
+        int voituresRestantesElectriquesIntermediaires = 9;
+        int voituresLouesElectriquesGrandes = 0;
+        int voituresRestantesElectriquesGrandes = 5;
+        String entreeButton = "";
         
         
         // Affichage de résultat
@@ -69,20 +76,28 @@ public class FacturationRoulonsVehiculesVerts
             System.out.println("Date et Heure : " + "26-01-2025 11:25:04");
             System.out.println(ENCADRE_SOUS_TIRE+ "\n");
             
-            System.out.println(MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);
-            System.out.println("*************************************************");
-            System.out.println("Grandeur          Hybride      Électrique");
-            System.out.println("****************************************");            
-            System.out.printf("\nGrand %d %d", voituresRestantesHybridesGrandes, voituresRestantesHybridesGrandes);
-            System.out.printf("\nPetit %d %d", voituresRestantesHybridesPetites, voituresRestantesElectriquesPetites);
-            System.out.printf("\nIntermédiaire %d %d", voituresRestantesHybridesIntermediaires, voituresRestantesElectriquesIntermediaires);
+            if (choixOption == 1) {
+                            
+                System.out.println(MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);
+                System.out.println("*************************************************");
+                System.out.println("Grandeur          Hybride      Électrique");
+                System.out.println("****************************************");            
+                System.out.printf("Petit %15d %15d", voituresRestantesHybridesPetites, voituresRestantesElectriquesPetites);
+                System.out.printf("\nIntermédiaire %7d %14d", voituresRestantesHybridesIntermediaires, voituresRestantesElectriquesIntermediaires);
+                System.out.printf("\nGrand %14d %15d\n\n", voituresRestantesHybridesGrandes, voituresRestantesElectriquesGrandes);
+                
+                System.out.print("Appuyer sur <ENTREE> pour réafficher le menu...\n");   
+                entreeButton = Clavier.lireString();
+            
+            
+                        };
+                      
+            
+         } while ((choixOption > 0 && choixOption <= 4 )|| entreeButton == "\n");
+    
+    
+    
+    
+    };      
         
-        
-        }while(choixOption > 0 && choixOption <= 4);
-    
-    
-    
-    
-    }      
-        
-}
+};

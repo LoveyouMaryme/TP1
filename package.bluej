@@ -1,3 +1,32 @@
 #BlueJ package file
-#Sat Feb 01 12:10:22 EST 2025
+editor.fx.0.height=475
+editor.fx.0.width=738
+editor.fx.0.x=-12
+editor.fx.0.y=52
+objectbench.height=98
+objectbench.width=702
+package.divider.horizontal=0.6
+package.divider.vertical=0.6452702702702703
+package.editor.height=184
+package.editor.width=610
+package.editor.x=0
+package.editor.y=513
+package.frame.height=360
+package.frame.width=726
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
 project.charset=UTF-8
+readme.height=60
+readme.name=@README
+readme.width=48
+readme.x=10
+readme.y=10
+target1.height=70
+target1.name=FacturationRoulonsVehiculesVerts
+target1.showInterface=false
+target1.type=ClassTarget
+target1.width=220
+target1.x=80
+target1.y=10

@@ -5,6 +5,11 @@
  * @author (your name)
  * @version (a version number or a date)
  */
+
+// Importing LocalDateTime and DateTimeFormatter 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class FacturationRoulonsVehiculesVerts
 {
     public static void main(String [] args)
@@ -23,6 +28,23 @@ public class FacturationRoulonsVehiculesVerts
         final String ADRESSE_ENTREPRISE = "1500 rue Matata, Hakuna, Québec Y0Z 6Y7" ;
         final String TELEPHONE_ENTREPRISE = "438 222-1111";
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
+        
+            // Constants for vehicle types
+        final String GRAND_H = "H";
+        final String PETIT_H = "h";
+        final String GRAND_E = "E";
+        final String PETIT_E = "e";
+        
+            // Constants for vehicle sizes
+        final String GRAND_P = "P";
+        final String PETIT_P = "p";
+        final String GRAND_I = "I";
+        final String PETIT_I = "i";
+        final String GRAND_G = "G";
+        final String PETIT_G = "g";
+        
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS");
+        
 
         // Déclaration de variables
         byte choixOption;
@@ -39,6 +61,13 @@ public class FacturationRoulonsVehiculesVerts
         int voituresLouesElectriquesGrandes = 0;
         int voituresRestantesElectriquesGrandes = 5;
         boolean isPressed = false;
+        String choixOptionTypeVoiture;
+        String choixOptionGrandeurVoiture;
+        
+        
+        LocalDateTime now = LocalDateTime.now();
+        String formattedString = now.format(FORMATTER);
+        
 
         // Affichage de résultat
         System.out.println(ENCADRE_TITRE);
@@ -47,7 +76,7 @@ public class FacturationRoulonsVehiculesVerts
         do {  
             //Afficher le menu initial
             System.out.println(ENCADRE_TITRE + "\n");
-            System.out.println(MESSAGE_MENU_CHOIX);
+            System.out.println(MESSAGE_MENU_CHOIX+ "\n");
             System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
             System.out.print("\nEntrez votre choix : ");
             choixOption = Clavier.lireByte();
@@ -55,14 +84,21 @@ public class FacturationRoulonsVehiculesVerts
             
             //Gérer les erreurs d'options  
             while(choixOption <= 0 || choixOption >= 5) {
-                System.out.println("\nEntrée invalide !\n");
+                System.out.println("Entrée invalide !\n");
                 System.out.println(MESSAGE_MENU_CHOIX);
-                System.out.printf("\n%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
+                System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
                 System.out.print("\nEntrez votre choix : ");
                 choixOption = Clavier.lireByte();
 
             }
-
+            
+            System.out.println("\n-----------------------------------------------------------");
+            System.out.println(NOM_ENTREPRISE);
+            System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
+            System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
+            System.out.println("Date et Heure : " + formattedString );
+            System.out.println("-----------------------------------------------------------\n");
+            
             //Afficher les différents choix
             switch(choixOption){
                 case 1:
@@ -71,11 +107,37 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("Grandeur          Hybride      Électrique");
                     System.out.println("****************************************");            
                     System.out.printf("Petit %15d %15d", voituresRestantesHybridesPetites, voituresRestantesElectriquesPetites);
-                    System.out.printf("\nIntermédiaire %7d %14d", voituresRestantesHybridesIntermediaires, voituresRestantesElectriquesIntermediaires);
-                    System.out.printf("\nGrand %14d %15d\n\n", voituresRestantesHybridesGrandes, voituresRestantesElectriquesGrandes);
+                    System.out.printf("\nIntermédiaire %7d %15d", voituresRestantesHybridesIntermediaires, voituresRestantesElectriquesIntermediaires);
+                    System.out.printf("\nGrand %15d %15d\n\n", voituresRestantesHybridesGrandes, voituresRestantesElectriquesGrandes);
+                    System.out.println("-----------------------------------------------------------");
                     break;
                 case 2:
-                    System.out.println("Option2");
+                    System.out.println("Entrez le type du véhicule à louer");
+                    System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :	");
+                    choixOptionTypeVoiture = Clavier.lireString();
+    
+                    
+                    while( !choixOptionTypeVoiture.toLowerCase().equals(PETIT_H) && !choixOptionTypeVoiture.toLowerCase().equals(PETIT_E)){
+                       System.out.println("\nEntrée invalide !\n");
+                       System.out.println("Entrez le type du véhicule à louer");
+                       System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :	");
+                       choixOptionTypeVoiture = Clavier.lireString();
+                       
+                    }
+                    
+                    System.out.println("\nEntrez la grandeur du véhicule à louer");
+                    System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :	");
+                    choixOptionGrandeurVoiture = Clavier.lireString();
+                    
+                    while(!choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_P) && !choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_I) && !choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_G) ){
+                       System.out.println("\nEntrée invalide !\n");
+                       System.out.println("Entrez la grandeur du véhicule à louer");
+                       System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :	");
+                       choixOptionTypeVoiture = Clavier.lireString();
+                       
+                    }
+                    
+                    
                     break;
                 case 3:
                     System.out.println(MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);
@@ -85,13 +147,15 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.printf("Petit %15d %15d", voituresLouesHybridesPetites, voituresLouesElectriquesPetites);
                     System.out.printf("\nIntermédiaire %7d %14d", voituresLouesHybridesIntermediaires, voituresLouesElectriquesIntermediaires);
                     System.out.printf("\nGrand %14d %15d\n\n", voituresLouesHybridesGrandes, voituresLouesElectriquesGrandes);
+                    System.out.println("-----------------------------------------------------------");
                     break;
                 case 4:
                     System.out.println("Option4");
                     break;
 
             } 
-            System.out.println("Appuyer sur <ENTREE> pour réafficher le menu...");
+            // people can add a stupid letter here for nothing; what can I do
+            System.out.println("\n\nAppuyer sur <ENTREE> pour réafficher le menu...");
             Clavier.lireFinLigne();
             isPressed = true;
 

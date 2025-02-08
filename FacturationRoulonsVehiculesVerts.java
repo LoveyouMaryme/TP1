@@ -28,6 +28,12 @@ public class FacturationRoulonsVehiculesVerts
         final String ADRESSE_ENTREPRISE = "1500 rue Matata, Hakuna, Québec Y0Z 6Y7" ;
         final String TELEPHONE_ENTREPRISE = "438 222-1111";
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
+        final String MESSAGE_SOUS_TOTAL = "Sous-total";
+        final String MESSAGE_MONTANT_TPS = "Montant TPS";
+        final String MESSAGE_MONTANT_TVQ = "Montant TVQ";
+        final String MESSAGE_MONTANT_TOTAL = "Montant Total";
+        final String MESSAGE_REMERCIEMENT = "Merci pour votre confiance!";
+        
         final float ASSURANCE_HYBRIDE_PETIT = 13.50f;
         final float ASSURANCE_HYBRIDE_INTERMEDIAIRE = 14.50f;
         final float ASSURANCE_HYBRIDE_GRAND = 15.50f;
@@ -125,12 +131,12 @@ public class FacturationRoulonsVehiculesVerts
 
             }
             
-            System.out.println("\n-----------------------------------------------------------");
+            System.out.println(ENCADRE_SOUS_TIRE);
             System.out.println(NOM_ENTREPRISE);
             System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
             System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
             System.out.println("Date et Heure : " + tempsFormate );
-            System.out.println("-----------------------------------------------------------\n");
+            System.out.println(ENCADRE_SOUS_TIRE);
             
             //Afficher les différents choix
             switch(choixOption){
@@ -142,7 +148,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.printf("Petit %15d %15d", voituresRestantesHybridesPetites, voituresRestantesElectriquesPetites);
                     System.out.printf("\nIntermédiaire %7d %15d", voituresRestantesHybridesIntermediaires, voituresRestantesElectriquesIntermediaires);
                     System.out.printf("\nGrand %15d %15d\n\n", voituresRestantesHybridesGrandes, voituresRestantesElectriquesGrandes);
-                    System.out.println("-----------------------------------------------------------");
+                    System.out.println(ENCADRE_SOUS_TIRE);
                     break;
                 case 2:
                     System.out.println("Entrez le type du véhicule à louer");
@@ -236,14 +242,14 @@ public class FacturationRoulonsVehiculesVerts
                     }
                     
                     
-                    System.out.println("\n-----------------------------------------------------------");
+                    System.out.println(ENCADRE_SOUS_TIRE);
                     System.out.println(NOM_ENTREPRISE);
                     System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
                     System.out.println("Date et Heure : " + tempsFormate );
                     nombreFacture++;
                     System.out.println("Facture No :    " + nombreFacture);
-                    System.out.println("-----------------------------------------------------------\n");
+                    System.out.println(ENCADRE_SOUS_TIRE);
                     
                     System.out.println("Prénom et nom : " +  prenomLocataire + " " + nomLocataire);
                     System.out.println("Téléphone : " + telephoneLocataire);
@@ -308,7 +314,7 @@ public class FacturationRoulonsVehiculesVerts
                         }
                     }
                     
-                    
+                    System.out.printf("%20s, %dS", MESSAGE_SOUS_TOTAL);
                     
                     
                             
@@ -321,7 +327,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.printf("Petit %15d %15d", voituresLouesHybridesPetites, voituresLouesElectriquesPetites);
                     System.out.printf("\nIntermédiaire %7d %14d", voituresLouesHybridesIntermediaires, voituresLouesElectriquesIntermediaires);
                     System.out.printf("\nGrand %14d %15d\n\n", voituresLouesHybridesGrandes, voituresLouesElectriquesGrandes);
-                    System.out.println("-----------------------------------------------------------");
+                    System.out.println(ENCADRE_SOUS_TIRE);
                     break;
                 case 4:
                     System.out.println("Option4");

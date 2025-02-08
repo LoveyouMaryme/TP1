@@ -30,20 +30,20 @@ public class FacturationRoulonsVehiculesVerts
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
         
             // Constants for vehicle types
-        final String GRAND_H = "H";
-        final String PETIT_H = "h";
-        final String GRAND_E = "E";
+        final String PETIT_H = "h"; //change name disgusting
         final String PETIT_E = "e";
         
             // Constants for vehicle sizes
-        final String GRAND_P = "P";
+      
         final String PETIT_P = "p";
-        final String GRAND_I = "I";
         final String PETIT_I = "i";
-        final String GRAND_G = "G";
         final String PETIT_G = "g";
         
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS");
+        
+        final String ASSURANCE_OUI = "oui";
+        final String ASSURANCE_NON = "non";
+        
         
 
         // Déclaration de variables
@@ -66,6 +66,13 @@ public class FacturationRoulonsVehiculesVerts
         int maxJoursLocation = 30;
         int minJoursLocation = 0;
         int choixJoursLocation;
+        String prenomLocataire;
+        String nomLocataire;
+        String telephoneLocataire;
+        String permisConduiteLocataire;
+        String modePaiement;
+        String choixAssurance;
+        
         
         
         
@@ -160,7 +167,6 @@ public class FacturationRoulonsVehiculesVerts
                     }
                     
                     System.out.println(" véhicules de ce type et de cette grandeur sont disponibles !");
-                    
                     System.out.println("Entrez le nombre de jours de location");
                     System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
                     choixJoursLocation = Clavier.lireInt();
@@ -172,6 +178,8 @@ public class FacturationRoulonsVehiculesVerts
                        choixJoursLocation = Clavier.lireInt();
                        
                     }
+                    
+                    System.out.print("Entrez le prénom du locataire :	");
                     
                     break;
                 case 3:

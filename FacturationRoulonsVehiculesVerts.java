@@ -28,6 +28,19 @@ public class FacturationRoulonsVehiculesVerts
         final String ADRESSE_ENTREPRISE = "1500 rue Matata, Hakuna, Québec Y0Z 6Y7" ;
         final String TELEPHONE_ENTREPRISE = "438 222-1111";
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
+        final float ASSURANCE_HYBRIDE_PETIT = 13.50f;
+        final float ASSURANCE_HYBRIDE_INTERMEDIAIRE = 14.50f;
+        final float ASSURANCE_HYBRIDE_GRAND = 15.50f;
+        final float ASSURANCE_ELECTRIQUE_PETIT = 12.50f;
+        final float ASSURANCE_ELECTRIQUE_INTERMEDIAIRE = 12.75f;
+        final float ASSURANCE_ELECTRIQUE_GRAND = 13.25f;
+        final float LOCATION_HYBRIDE_PETIT = 55.75f;
+        final float LOCATION_HYBRIDE_INTERMEDIAIRE = 60.25f;
+        final float LOCATION_HYBRIDE_GRAND = 65.50f;
+        final float LOCATION_ELECTRIQUE_PETIT = 45.50f;
+        final float LOCATION_ELECTRIQUE_INTERMEDIAIRE = 50.50f;
+        final float LOCATION_ELECTRIQUE_GRAND = 55.25f;
+        
         
             // Constants for vehicle types
         final String PETIT_H = "h"; //change name disgusting
@@ -85,6 +98,7 @@ public class FacturationRoulonsVehiculesVerts
         String tempsFormate = now.format(FORMATTER);
         String dateLocation = now.format(FORMATTER);
         String dateRetour;
+        float sousTotalLocation;
         
         
 
@@ -235,8 +249,20 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("Téléphone : " + telephoneLocataire);
                     System.out.println("Permis de conduire : " + permisConduiteLocataire);
                     
-                    System.out.println("\nType de véhicule : " + choixOptionTypeVoiture);
-                    System.out.println("Grandeur du véhicule : " + choixOptionGrandeurVoiture);
+                    System.out.print("\nType de véhicule : ");
+                    if(choixOptionTypeVoiture.equals(PETIT_H)){
+                        System.out.println("Hybride");
+                    }else{
+                        System.out.println("Électrique");
+                        }
+                    System.out.print("Grandeur du véhicule : ");
+                    if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                        System.out.println("Petit");
+                    }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                        System.out.println("Intermédiaire");
+                    }else{
+                        System.out.println("Grand");
+                        }
                     
                     System.out.println("\nNombre de jours de location : " + choixJoursLocation);
                     System.out.println("Date de location : " + tempsFormate);
@@ -250,7 +276,37 @@ public class FacturationRoulonsVehiculesVerts
                         System.out.println("Crédit");
                         }
                     
-                    
+                        
+                    System.out.print("Prix de la location par jour       ");
+                    if(choixOptionTypeVoiture.equals(PETIT_H)){
+                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            System.out.printf("%d$", LOCATION_HYBRIDE_PETIT);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de la location              %d$", sousTotalLocation);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                            System.out.printf("%d$", LOCATION_HYBRIDE_INTERMEDIAIRE);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de la location              %d$", sousTotalLocation);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                            System.out.printf("%d$", LOCATION_HYBRIDE_GRAND);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de la location              %d$", sousTotalLocation);
+                        }
+                    }else if((choixOptionTypeVoiture.equals(PETIT_E))){
+                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            System.out.printf("%d$", LOCATION_ELECTRIQUE_PETIT);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de l'assurance             %d$", sousTotalLocation);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                            System.out.printf("%d$", LOCATION_ELECTRIQUE_INTERMEDIAIRE);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de l'assurance             %d$", sousTotalLocation);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                            System.out.printf("%d$", LOCATION_ELECTRIQUE_GRAND);
+                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;
+                            System.out.printf("\nMontant de l'assurance             %d$", sousTotalLocation);
+                        }
+                    }
                     
                     
                     

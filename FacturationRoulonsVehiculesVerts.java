@@ -40,9 +40,14 @@ public class FacturationRoulonsVehiculesVerts
         final String PETIT_G = "g";
         
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS");
+        final int MAXJOURSLOCATION = 30;
+        final int MINJOURSLOCATION = 0;
         
         final String ASSURANCE_OUI = "oui";
         final String ASSURANCE_NON = "non";
+        
+        final String PETIT_D = "d";
+        final String PETIT_C = "c";
         
         
 
@@ -63,8 +68,7 @@ public class FacturationRoulonsVehiculesVerts
         boolean isPressed = false;
         String choixOptionTypeVoiture;
         String choixOptionGrandeurVoiture;
-        int maxJoursLocation = 30;
-        int minJoursLocation = 0;
+        
         int choixJoursLocation;
         String prenomLocataire;
         String nomLocataire;
@@ -72,12 +76,16 @@ public class FacturationRoulonsVehiculesVerts
         String permisConduiteLocataire;
         String modePaiement;
         String choixAssurance;
+        int nombreFacture = 0;
         
         
         
         
         LocalDateTime now = LocalDateTime.now();
-        String formattedString = now.format(FORMATTER);
+        String tempsFormate = now.format(FORMATTER);
+        String dateLocation = now.format(FORMATTER);
+        String dateRetour;
+        
         
 
         // Affichage de résultat
@@ -107,7 +115,7 @@ public class FacturationRoulonsVehiculesVerts
             System.out.println(NOM_ENTREPRISE);
             System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
             System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
-            System.out.println("Date et Heure : " + formattedString );
+            System.out.println("Date et Heure : " + tempsFormate );
             System.out.println("-----------------------------------------------------------\n");
             
             //Afficher les différents choix
@@ -171,7 +179,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
                     choixJoursLocation = Clavier.lireInt();
                     
-                    while(choixJoursLocation < minJoursLocation || choixJoursLocation >= 30){
+                    while(choixJoursLocation < MINJOURSLOCATION|| choixJoursLocation >= MAXJOURSLOCATION){
                        System.out.println("\nEntrée invalide !\n");
                        System.out.println("Entrez le nombre de jours de location");
                        System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
@@ -179,8 +187,75 @@ public class FacturationRoulonsVehiculesVerts
                        
                     }
                     
-                    System.out.print("Entrez le prénom du locataire :	");
+                    System.out.print("Entrez le prénom du locataire :    \n");
+                    prenomLocataire = Clavier.lireString();
+                    System.out.print("Entrez le nom du locataire :    \n");
+                    nomLocataire = Clavier.lireString();
+                    System.out.print("Entrez le numéro de téléphone du locataire :    \n");
+                    telephoneLocataire = Clavier.lireString();
+                    System.out.print("Entrez le numéro de permis de conduire du locataire :    \n");
+                    permisConduiteLocataire = Clavier.lireString();
                     
+                    System.out.println("Entrez le mode de paiement");
+                    System.out.println("(D ou d pour Débit, C ou c pour Crédit):");
+                    modePaiement = Clavier.lireString().toLowerCase();
+                    
+                    while( !modePaiement.equals(PETIT_D) && !modePaiement.equals(PETIT_C)){
+                       System.out.println("\nEntrée invalide !\n");
+                       System.out.println("Entrez le mode de paiement");
+                       System.out.println("(D ou d pour Débit, C ou c pour Crédit):    ");
+                       modePaiement = Clavier.lireString().toLowerCase();
+                       
+                    }
+                    
+                    
+                    System.out.println("Désirez-vous prendre l'assurance");
+                    System.out.println("(O ou o pour Oui, N ou n pour Non) ? :    ");
+                    choixAssurance = Clavier.lireString().toLowerCase();
+                    
+                    while( !choixAssurance.equals(ASSURANCE_OUI) && !choixAssurance.equals(ASSURANCE_NON)){
+                       System.out.println("\nEntrée invalide !\n");
+                       System.out.println("Entrez le mode de paiement");
+                       System.out.println("(D ou d pour Débit, C ou c pour Crédit):");
+                       choixAssurance = Clavier.lireString().toLowerCase();
+                       
+                    }
+                    
+                    
+                    System.out.println("\n-----------------------------------------------------------");
+                    System.out.println(NOM_ENTREPRISE);
+                    System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
+                    System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
+                    System.out.println("Date et Heure : " + tempsFormate );
+                    nombreFacture++;
+                    System.out.println("Facture No :    " + nombreFacture);
+                    System.out.println("-----------------------------------------------------------\n");
+                    
+                    System.out.println("Prénom et nom : " +  prenomLocataire + " " + nomLocataire);
+                    System.out.println("Téléphone : " + telephoneLocataire);
+                    System.out.println("Permis de conduire : " + permisConduiteLocataire);
+                    
+                    System.out.println("\nType de véhicule : " + choixOptionTypeVoiture);
+                    System.out.println("Grandeur du véhicule : " + choixOptionGrandeurVoiture);
+                    
+                    System.out.println("\nNombre de jours de location : " + choixJoursLocation);
+                    System.out.println("Date de location : " + tempsFormate);
+                    dateRetour = now.plusDays(choixJoursLocation).format(FORMATTER);
+                    System.out.println("Date de retour   : " +  dateRetour);
+                    
+                    System.out.printf("Mode de paiement : ");
+                    if(modePaiement.equals(PETIT_D)){
+                        System.out.println("Débit");
+                    }else{
+                        System.out.println("Crédit");
+                        }
+                    
+                    
+                    
+                    
+                    
+                    
+                            
                     break;
                 case 3:
                     System.out.println(MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);

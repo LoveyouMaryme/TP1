@@ -63,6 +63,10 @@ public class FacturationRoulonsVehiculesVerts
         boolean isPressed = false;
         String choixOptionTypeVoiture;
         String choixOptionGrandeurVoiture;
+        int maxJoursLocation = 30;
+        int minJoursLocation = 0;
+        int choixJoursLocation;
+        
         
         
         LocalDateTime now = LocalDateTime.now();
@@ -113,30 +117,61 @@ public class FacturationRoulonsVehiculesVerts
                     break;
                 case 2:
                     System.out.println("Entrez le type du véhicule à louer");
-                    System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :	");
-                    choixOptionTypeVoiture = Clavier.lireString();
+                    System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :    ");
+                    choixOptionTypeVoiture = Clavier.lireString().toLowerCase();
     
                     
-                    while( !choixOptionTypeVoiture.toLowerCase().equals(PETIT_H) && !choixOptionTypeVoiture.toLowerCase().equals(PETIT_E)){
+                    while( !choixOptionTypeVoiture.equals(PETIT_H) && !choixOptionTypeVoiture.equals(PETIT_E)){
                        System.out.println("\nEntrée invalide !\n");
                        System.out.println("Entrez le type du véhicule à louer");
-                       System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :	");
-                       choixOptionTypeVoiture = Clavier.lireString();
+                       System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :    ");
+                       choixOptionTypeVoiture = Clavier.lireString().toLowerCase();
                        
                     }
                     
                     System.out.println("\nEntrez la grandeur du véhicule à louer");
-                    System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :	");
-                    choixOptionGrandeurVoiture = Clavier.lireString();
+                    System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :    ");
+                    choixOptionGrandeurVoiture = Clavier.lireString().toLowerCase();
                     
-                    while(!choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_P) && !choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_I) && !choixOptionGrandeurVoiture.toLowerCase().equals(PETIT_G) ){
+                    while(!choixOptionGrandeurVoiture.equals(PETIT_P) && !choixOptionGrandeurVoiture.equals(PETIT_I) && !choixOptionGrandeurVoiture.equals(PETIT_G) ){
                        System.out.println("\nEntrée invalide !\n");
                        System.out.println("Entrez la grandeur du véhicule à louer");
-                       System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :	");
-                       choixOptionTypeVoiture = Clavier.lireString();
+                       System.out.println("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :    ");
+                       choixOptionTypeVoiture = Clavier.lireString().toLowerCase();
                        
                     }
                     
+                    if(choixOptionTypeVoiture.equals(PETIT_H)){
+                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }
+                    }else if((choixOptionTypeVoiture.equals(PETIT_E))){
+                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                            System.out.print(voituresRestantesHybridesPetites);
+                        }
+                    }
+                    
+                    System.out.println(" véhicules de ce type et de cette grandeur sont disponibles !");
+                    
+                    System.out.println("Entrez le nombre de jours de location");
+                    System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
+                    choixJoursLocation = Clavier.lireInt();
+                    
+                    while(choixJoursLocation < minJoursLocation || choixJoursLocation >= 30){
+                       System.out.println("\nEntrée invalide !\n");
+                       System.out.println("Entrez le nombre de jours de location");
+                       System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
+                       choixJoursLocation = Clavier.lireInt();
+                       
+                    }
                     
                     break;
                 case 3:

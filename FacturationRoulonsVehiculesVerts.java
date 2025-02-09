@@ -24,6 +24,7 @@ public class FacturationRoulonsVehiculesVerts
 
     {
         // Déclaration de constantes
+                //Messages affichés
         final String NOM_ENTREPRISE = "Roulons les Véhicules Verts (RVV)";
         final String MESSAGE_BIENVENUE = "Bienvenue dans le système de facturation de " + NOM_ENTREPRISE;
         final String ENCADRE_TITRE = "---------------------------------------------------------------------------------";
@@ -44,13 +45,15 @@ public class FacturationRoulonsVehiculesVerts
         final String MESSAGE_MONTANT_TVQ = "Montant TVQ";
         final String MESSAGE_MONTANT_TOTAL = "Montant Total";
         final String MESSAGE_REMERCIEMENT = "Merci pour votre confiance!";
-
+        
+                // Prix des assurances et des locations
         final float ASSURANCE_HYBRIDE_PETIT = 13.50f;
         final float ASSURANCE_HYBRIDE_INTERMEDIAIRE = 14.50f;
         final float ASSURANCE_HYBRIDE_GRAND = 15.50f;
         final float ASSURANCE_ELECTRIQUE_PETIT = 12.50f;
         final float ASSURANCE_ELECTRIQUE_INTERMEDIAIRE = 12.75f;
         final float ASSURANCE_ELECTRIQUE_GRAND = 13.25f;
+        
         final float LOCATION_HYBRIDE_PETIT = 55.75f;
         final float LOCATION_HYBRIDE_INTERMEDIAIRE = 60.25f;
         final float LOCATION_HYBRIDE_GRAND = 65.50f;
@@ -58,16 +61,13 @@ public class FacturationRoulonsVehiculesVerts
         final float LOCATION_ELECTRIQUE_INTERMEDIAIRE = 50.50f;
         final float LOCATION_ELECTRIQUE_GRAND = 55.25f;
 
-       
+               // Choix de l'utilisateur
         final String VEHICULE_HYBRIDE = "h"; 
         final String VEHICULE_ELECTRIQUE = "e";
-
-    
         final String VEHICULE_PETIT = "p";
         final String VEHICULE_INTERMEDIAIRE = "i";
         final String VEHICULE_GRAND = "g";
 
-        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:SS");
         final int MAXJOURSLOCATION = 30;
         final int MINJOURSLOCATION = 0;
 
@@ -79,13 +79,20 @@ public class FacturationRoulonsVehiculesVerts
 
         final String VISA_CARTE_CREDIT = "v";
         final String MC_CARTE_CREDIT = "m";
-
+        
+                // Formatter les dates
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:SS");
+        
+                // Taxes et Rabais
         final float PERCENTAGE_TPS = 0.05f;
         final float PERCENTAGE_TVQ = 0.09975f;
         final float POURCENTAGE_RABAIS_LOCATION = 0.20f;
 
+        
         // Déclaration de variables
-        byte choixOption;
+        
+        
+                // Inventaire des voitures
         int voituresLouesHybridesPetites = 0;
         int voituresRestantesHybridesPetites = 12;
         int voituresLouesHybridesIntermediaires = 0;
@@ -98,22 +105,35 @@ public class FacturationRoulonsVehiculesVerts
         int voituresRestantesElectriquesIntermediaires = 9;
         int voituresLouesElectriquesGrandes = 0;
         int voituresRestantesElectriquesGrandes = 5;
-        boolean isPressed = false;
+        
+        int nombreVoituresChoisiesRestantes;
+        
+                
+                // Choix du client
         String choixOptionTypeVoiture;
         String choixOptionGrandeurVoiture;
-
+        byte choixOption;
         int choixJoursLocation;
+        String choixAssurance;
+        boolean isPressed = false;
+        
+                //Information du client
         String prenomLocataire;
         String nomLocataire;
         String telephoneLocataire;
         String permisConduiteLocataire;
         String modePaiement;
-        String choixAssurance;
-        int nombreFacture = 0;
+        String typeCarteCredit;
+        String numeroCarteCredit;
+                
+                //Information sur la facture   
         LocalDateTime now = LocalDateTime.now();
         String dateNowFormate = now.format(FORMATTER);
         String dateLocationFormate = now.plusHours(3).format(FORMATTER);
         String dateRetourFormate;
+        
+        int nombreFacture = 0;
+        
         float montantLocationChoisie = 0.0f;
         float montantRabaisLocation = 0.0f;
         float prixAssurance = 0.0f;
@@ -123,9 +143,9 @@ public class FacturationRoulonsVehiculesVerts
         float montantTps;
         float montantTvq;
         float montantTotal;
-        String typeCarteCredit;
-        String numeroCarteCredit;
-        int nombreVoituresChoisiesRestantes;
+        
+            
+        
 
         // Affichage de résultat
         System.out.println(ENCADRE_TITRE);

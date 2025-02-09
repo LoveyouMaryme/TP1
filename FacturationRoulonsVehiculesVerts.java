@@ -1,9 +1,16 @@
 
 /**
- * Write a description of class FacturationRoulonsVehiculesVerts here.
+ * Ce programme permet de gérer la location des véhicules hybrides et électriques tel que demandé par le client.
+ * 
+ * On peut : 
+ *  1. Afficher l'inventaire des voitures 
+ *  2. Louer une voiture en fonction de son type, de sa taille et de sa disponibilité
+ *  3. Créer une facture tout en prennant en compte les calculs business spécifés par le client
+ *  4. Regarder le nombre de voitures louées
+ *  5. Sortir du programme
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Love-Mary Victor (VICL12599701, CJ490809)
+ * @version : 9 Février, 2025
  */
 
 // Importing LocalDateTime and DateTimeFormatter 
@@ -27,6 +34,9 @@ public class FacturationRoulonsVehiculesVerts
         final String CHOIX_QUATRE = "4. Quitter le programme";
         final String ADRESSE_ENTREPRISE = "1500 rue Matata, Hakuna, Québec Y0Z 6Y7" ;
         final String TELEPHONE_ENTREPRISE = "438 222-1111";
+        final String MESSAGE_RABAIS_LOCATION = "Rabais sur le prix de la location";
+        final String MESSAGE_MONTANT_LOCATION_SOUS_TOTAL = "Montant de la location";
+        final String MESSAGE_MONTANT_ASSURANCE = "Montant de l'assurance";
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
         final String MESSAGE_SOUS_TOTAL = "Sous-total";
         final String MESSAGE_MONTANT_TPS = "Montant TPS";
@@ -57,7 +67,7 @@ public class FacturationRoulonsVehiculesVerts
         final String PETIT_I = "i";
         final String PETIT_G = "g";
 
-        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM:SS");
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:SS");
         final int MAXJOURSLOCATION = 30;
         final int MINJOURSLOCATION = 0;
 
@@ -74,14 +84,14 @@ public class FacturationRoulonsVehiculesVerts
         final float PERCENTAGE_TVQ = 0.09975f;
 
 
-        // Déclaration de variables
+        // Déclaration de variablesz
         byte choixOption;
         int voituresLouesHybridesPetites = 0;
         int voituresRestantesHybridesPetites = 12;
         int voituresLouesHybridesIntermediaires = 0;
         int voituresRestantesHybridesIntermediaires = 10;
         int voituresLouesHybridesGrandes = 0;
-        int voituresRestantesHybridesGrandes = 0;
+        int voituresRestantesHybridesGrandes = 3;
         int voituresLouesElectriquesPetites = 0;
         int voituresRestantesElectriquesPetites = 11;
         int voituresLouesElectriquesIntermediaires = 0;
@@ -101,9 +111,12 @@ public class FacturationRoulonsVehiculesVerts
         String choixAssurance;
         int nombreFacture = 0;
         LocalDateTime now = LocalDateTime.now();
-        String tempsFormate = now.format(FORMATTER);
-        String dateLocation = now.format(FORMATTER);
-        String dateRetour;
+        String dateNowFormate = now.format(FORMATTER);
+        String dateLocationFormate = now.plusHours(3).format(FORMATTER);
+        String dateRetourFormate;
+        float montantLocationChoisie = 0.0f;
+        float montantRabaisLocation = 0.0f;
+        float pourcentageRabaisLocation = 0.20f;
         float prixAssurance = 0.0f;
         float prixAssuranceFoisJours;
         float sousTotalLocation = 0.0f;
@@ -122,11 +135,11 @@ public class FacturationRoulonsVehiculesVerts
         System.out.println(ENCADRE_TITRE + "\n");
 
         do {  
+            
             //Afficher le menu initial
-
-            System.out.println(MESSAGE_MENU_CHOIX);
+            System.out.println("\n" + MESSAGE_MENU_CHOIX);
             System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
-            System.out.print("\nEntrez votre choix : ");
+            System.out.print("\n\nEntrez votre choix : ");
             choixOption = Clavier.lireByte();
 
             //Gérer les erreurs d'options  
@@ -135,7 +148,7 @@ public class FacturationRoulonsVehiculesVerts
                 System.out.println("\n" + MESSAGE_MENU_CHOIX);
                 System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
                 System.out.print("\nEntrez votre choix : ");
-                choixOption = Clavier.lireByte();
+                choixOption = Clavier.lireByteLn();
 
             }
 
@@ -147,7 +160,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println(NOM_ENTREPRISE);
                     System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
-                    System.out.println("Date et Heure : " + tempsFormate );
+                    System.out.println("Date et Heure : " + dateNowFormate );
                     System.out.println(ENCADRE_SOUS_TIRE);
 
                     System.out.println("\n" + MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);
@@ -268,7 +281,7 @@ public class FacturationRoulonsVehiculesVerts
 
                         } 
 
-                        System.out.println("Entrez le numéro de la carte de crédit :");
+                        System.out.print("\nEntrez le numéro de la carte de crédit :");
                         numeroCarteCredit = Clavier.lireString().toLowerCase();
                     }
 
@@ -287,7 +300,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println(NOM_ENTREPRISE);
                     System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
-                    System.out.println("Date et Heure : " + tempsFormate );
+                    System.out.println("Date et Heure : " + dateNowFormate);
                     nombreFacture++;
                     System.out.println("Facture No :    " + nombreFacture);
                     System.out.println(ENCADRE_SOUS_TIRE);
@@ -312,10 +325,10 @@ public class FacturationRoulonsVehiculesVerts
                     }
 
                     System.out.println("\nNombre de jours de location : " + choixJoursLocation);
-                    System.out.println("Date de location : " + tempsFormate);
+                    System.out.println("Date de location : " + dateLocationFormate);
 
-                    dateRetour = now.plusDays(choixJoursLocation).format(FORMATTER);
-                    System.out.println("Date de retour   : " +  dateRetour); //rajouter 3 heures;
+                    dateRetourFormate = now.plusHours(3).plusDays(choixJoursLocation).format(FORMATTER);
+                    System.out.println("Date de retour   : " +  dateRetourFormate); 
 
                     System.out.print("\nMode de paiement : ");
                     if(modePaiement.equals(PETIT_D)){
@@ -328,24 +341,25 @@ public class FacturationRoulonsVehiculesVerts
                     if(choixOptionTypeVoiture.equals(PETIT_H)){
                         if(choixOptionGrandeurVoiture.equals(PETIT_P)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_PETIT);
-                            sousTotalLocation = LOCATION_HYBRIDE_PETIT * choixJoursLocation;                            
+                            montantLocationChoisie = LOCATION_HYBRIDE_PETIT;                          
                         }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_INTERMEDIAIRE);
-                            sousTotalLocation = LOCATION_HYBRIDE_INTERMEDIAIRE * choixJoursLocation;                            
+                            montantLocationChoisie = LOCATION_HYBRIDE_INTERMEDIAIRE;                          
                         }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_GRAND);
-                            sousTotalLocation = LOCATION_HYBRIDE_GRAND * choixJoursLocation;                            
+                            montantLocationChoisie = LOCATION_HYBRIDE_GRAND;                          
                         }
                     }else if((choixOptionTypeVoiture.equals(PETIT_E))){
                         if(choixOptionGrandeurVoiture.equals(PETIT_P)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_PETIT);
+                            montantLocationChoisie = LOCATION_ELECTRIQUE_PETIT;
                             sousTotalLocation = LOCATION_ELECTRIQUE_PETIT * choixJoursLocation;
                         }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_INTERMEDIAIRE);
-                            sousTotalLocation = LOCATION_ELECTRIQUE_INTERMEDIAIRE * choixJoursLocation;
+                            montantLocationChoisie = LOCATION_ELECTRIQUE_INTERMEDIAIRE;
                         }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_GRAND);
-                            sousTotalLocation = LOCATION_ELECTRIQUE_GRAND * choixJoursLocation;
+                            montantLocationChoisie = LOCATION_ELECTRIQUE_GRAND;
                         }
                     }
                     System.out.print("\nPrix de l'assurance par jour       ");
@@ -378,19 +392,30 @@ public class FacturationRoulonsVehiculesVerts
                             break;
                         case "n":
                             prixAssurance = 0;
+                            System.out.printf("%.2f$", prixAssurance);
                             break;
                     }
-
-                    System.out.printf("\n\nMontant de la location              %.2f$", sousTotalLocation);
+                    
+                    if(choixJoursLocation > 15){
+                        montantRabaisLocation = montantLocationChoisie * pourcentageRabaisLocation;
+                        sousTotalLocation = ( montantLocationChoisie * choixJoursLocation ) - ( montantRabaisLocation * choixJoursLocation); 
+                        System.out.printf("\n%-34s %.2f$", MESSAGE_RABAIS_LOCATION, montantRabaisLocation);
+                    }else{
+                        sousTotalLocation = montantLocationChoisie * choixJoursLocation;
+                    }
+                    
+                    
+                    
+                    System.out.printf("\n\n%-34s %.2f$", MESSAGE_MONTANT_LOCATION_SOUS_TOTAL, sousTotalLocation);
                     prixAssuranceFoisJours = prixAssurance*choixJoursLocation;
-                    System.out.printf("\nMontant de l'assurance              %.2f$", prixAssuranceFoisJours);
+                    System.out.printf("\n%-34s %.2f$", MESSAGE_MONTANT_ASSURANCE, prixAssuranceFoisJours);
                     sousTotalLocationAvecAssurance = sousTotalLocation + prixAssuranceFoisJours;
-                    System.out.printf("\n\n%-20s  %.2f$", MESSAGE_SOUS_TOTAL, sousTotalLocationAvecAssurance);
+                    System.out.printf("\n\n%-34s %.2f$", MESSAGE_SOUS_TOTAL, sousTotalLocationAvecAssurance);
                     montantTps = sousTotalLocationAvecAssurance*PERCENTAGE_TPS;
-                    System.out.printf("\n%-20s  %.2f$", MESSAGE_MONTANT_TPS, montantTps);
+                    System.out.printf("\n%-34s %.2f$", MESSAGE_MONTANT_TPS, montantTps);
                     montantTvq = sousTotalLocationAvecAssurance*PERCENTAGE_TVQ;
-                    System.out.printf("\n%-20s  %.2f$", MESSAGE_MONTANT_TVQ, montantTvq);
-                    System.out.printf("\n%-20s  %.2f$", MESSAGE_MONTANT_TOTAL, (sousTotalLocationAvecAssurance + montantTps + montantTvq));
+                    System.out.printf("\n%-34s %.2f$", MESSAGE_MONTANT_TVQ, montantTvq);
+                    System.out.printf("\n%-34s %.2f$", MESSAGE_MONTANT_TOTAL, (sousTotalLocationAvecAssurance + montantTps + montantTvq));
 
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(MESSAGE_REMERCIEMENT);                            
@@ -400,7 +425,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println(NOM_ENTREPRISE);
                     System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
-                    System.out.println("Date et Heure : " + tempsFormate );
+                    System.out.println("Date et Heure : " + dateNowFormate );
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
 
                     System.out.println("\n" + MESSAGE_NOMBRE_VEHICULE_INVENTAIRE);
@@ -417,7 +442,8 @@ public class FacturationRoulonsVehiculesVerts
                     System.exit(0);
 
             } 
-            // people can add a stupid letter here for nothing; what can I do
+            
+            //watermark This is Love-Mary's work and no one else's. I cried too much on this.
             System.out.println("\n\nAppuyer sur <ENTREE> pour réafficher le menu...");
             Clavier.lireFinLigne();
             isPressed = true;

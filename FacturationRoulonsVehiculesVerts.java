@@ -11,6 +11,7 @@
  *
  * @author Love-Mary Victor (VICL12599701, CJ490809)
  * @version : 9 Février, 2025
+ * @github : https://github.com/LoveyouMaryme/TP1/blame/master/FacturationRoulonsVehiculesVerts.java
  */
 
 // Importing LocalDateTime and DateTimeFormatter 
@@ -57,15 +58,14 @@ public class FacturationRoulonsVehiculesVerts
         final float LOCATION_ELECTRIQUE_INTERMEDIAIRE = 50.50f;
         final float LOCATION_ELECTRIQUE_GRAND = 55.25f;
 
-        // Constants for vehicle types
-        final String PETIT_H = "h"; //change name disgusting
-        final String PETIT_E = "e";
+       
+        final String VEHICULE_HYBRIDE = "h"; 
+        final String VEHICULE_ELECTRIQUE = "e";
 
-        // Constants for vehicle sizes
-
-        final String PETIT_P = "p";
-        final String PETIT_I = "i";
-        final String PETIT_G = "g";
+    
+        final String VEHICULE_PETIT = "p";
+        final String VEHICULE_INTERMEDIAIRE = "i";
+        final String VEHICULE_GRAND = "g";
 
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:SS");
         final int MAXJOURSLOCATION = 30;
@@ -74,17 +74,17 @@ public class FacturationRoulonsVehiculesVerts
         final String ASSURANCE_OUI = "o";
         final String ASSURANCE_NON = "n";
 
-        final String PETIT_D = "d";
-        final String PETIT_C = "c";
+        final String CARTE_DEBIT = "d";
+        final String CARTE_CREDIT = "c";
 
         final String VISA_CARTE_CREDIT = "v";
         final String MC_CARTE_CREDIT = "m";
 
         final float PERCENTAGE_TPS = 0.05f;
         final float PERCENTAGE_TVQ = 0.09975f;
+        final float POURCENTAGE_RABAIS_LOCATION = 0.20f;
 
-
-        // Déclaration de variablesz
+        // Déclaration de variables
         byte choixOption;
         int voituresLouesHybridesPetites = 0;
         int voituresRestantesHybridesPetites = 12;
@@ -116,7 +116,6 @@ public class FacturationRoulonsVehiculesVerts
         String dateRetourFormate;
         float montantLocationChoisie = 0.0f;
         float montantRabaisLocation = 0.0f;
-        float pourcentageRabaisLocation = 0.20f;
         float prixAssurance = 0.0f;
         float prixAssuranceFoisJours;
         float sousTotalLocation = 0.0f;
@@ -128,21 +127,20 @@ public class FacturationRoulonsVehiculesVerts
         String numeroCarteCredit;
         int nombreVoituresChoisiesRestantes;
 
-
         // Affichage de résultat
         System.out.println(ENCADRE_TITRE);
         System.out.println(MESSAGE_BIENVENUE);
         System.out.println(ENCADRE_TITRE + "\n");
 
         do {  
-            
+
             //Afficher le menu initial
             System.out.println("\n" + MESSAGE_MENU_CHOIX);
             System.out.printf("%s\n%s\n%s\n%s\n", CHOIX_UN, CHOIX_DEUX, CHOIX_TROIS, CHOIX_QUATRE);
             System.out.print("\n\nEntrez votre choix : ");
             choixOption = Clavier.lireByte();
 
-            //Gérer les erreurs d'options  
+            
             while(choixOption <= 0 || choixOption >= 5) {
                 System.out.println("\nEntrée invalide !\n");
                 System.out.println("\n" + MESSAGE_MENU_CHOIX);
@@ -152,9 +150,9 @@ public class FacturationRoulonsVehiculesVerts
 
             }
 
-            
-            //Afficher les différents choix
+            //Afficher les différents choix du menu
             switch(choixOption){
+                // Afficher l'inventaire des voitures disponibles
                 case 1:
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(NOM_ENTREPRISE);
@@ -172,12 +170,14 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.printf("\nGrand %15d %15d\n\n", voituresRestantesHybridesGrandes, voituresRestantesElectriquesGrandes);
                     System.out.println(ENCADRE_SOUS_TIRE);
                     break;
+                    
+                // Louer une voiture selon sa taille, son type, sa disponibilité et valider les modalités de paiement
                 case 2:
                     System.out.println("\nEntrez le type du véhicule à louer");
                     System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :     ");
                     choixOptionTypeVoiture = Clavier.lireString().toLowerCase();
 
-                    while( !choixOptionTypeVoiture.equals(PETIT_H) && !choixOptionTypeVoiture.equals(PETIT_E)){
+                    while( !choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE) && !choixOptionTypeVoiture.equals(VEHICULE_ELECTRIQUE)){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez le type du véhicule à louer");
                         System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :    ");
@@ -189,7 +189,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :    ");
                     choixOptionGrandeurVoiture = Clavier.lireString().toLowerCase();
 
-                    while(!choixOptionGrandeurVoiture.equals(PETIT_P) && !choixOptionGrandeurVoiture.equals(PETIT_I) && !choixOptionGrandeurVoiture.equals(PETIT_G) ){
+                    while(!choixOptionGrandeurVoiture.equals(VEHICULE_PETIT) && !choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE) && !choixOptionGrandeurVoiture.equals(VEHICULE_GRAND) ){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez la grandeur du véhicule à louer");
                         System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :     ");
@@ -198,12 +198,12 @@ public class FacturationRoulonsVehiculesVerts
 
                     System.out.println("");
 
-                    if(choixOptionTypeVoiture.equals(PETIT_H)){
-                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                    if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
+                        if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesPetites;
                             voituresLouesHybridesPetites++;
                             voituresRestantesHybridesPetites--;
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesIntermediaires;
                             voituresLouesHybridesIntermediaires++;
                             voituresRestantesHybridesIntermediaires--;
@@ -213,11 +213,11 @@ public class FacturationRoulonsVehiculesVerts
                             voituresRestantesHybridesGrandes--;
                         }
                     }else{
-                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                        if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                             nombreVoituresChoisiesRestantes = voituresRestantesElectriquesPetites;
                             voituresLouesElectriquesPetites++;
                             voituresRestantesElectriquesPetites--;
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                             nombreVoituresChoisiesRestantes = voituresRestantesElectriquesIntermediaires;
                             voituresLouesElectriquesIntermediaires++;
                             voituresRestantesElectriquesIntermediaires--;
@@ -260,7 +260,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.print("(D ou d pour Débit, C ou c pour Crédit): ");
                     modePaiement = Clavier.lireString().toLowerCase();
 
-                    while( !modePaiement.equals(PETIT_D) && !modePaiement.equals(PETIT_C)){
+                    while( !modePaiement.equals(CARTE_DEBIT) && !modePaiement.equals(CARTE_CREDIT)){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez le mode de paiement");
                         System.out.print("(D ou d pour Débit, C ou c pour Crédit):    ");
@@ -268,7 +268,7 @@ public class FacturationRoulonsVehiculesVerts
 
                     }
 
-                    if(modePaiement.equals(PETIT_C)){
+                    if(modePaiement.equals(CARTE_CREDIT)){
                         System.out.println("\nEntrez le type de la carte de crédit");
                         System.out.print("(V ou v pour Visa, et M ou m pour MasterCard): ");
                         typeCarteCredit = Clavier.lireString().toLowerCase();
@@ -310,15 +310,15 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("Permis de conduire : " + permisConduiteLocataire);
 
                     System.out.print("\nType de véhicule : ");
-                    if(choixOptionTypeVoiture.equals(PETIT_H)){
+                    if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
                         System.out.println("Hybride");
                     }else{
                         System.out.println("Électrique");
                     }
                     System.out.print("Grandeur du véhicule : ");
-                    if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                    if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                         System.out.println("Petit");
-                    }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                    }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                         System.out.println("Intermédiaire");
                     }else{
                         System.out.println("Grand");
@@ -331,33 +331,33 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("Date de retour   : " +  dateRetourFormate); 
 
                     System.out.print("\nMode de paiement : ");
-                    if(modePaiement.equals(PETIT_D)){
+                    if(modePaiement.equals(CARTE_DEBIT)){
                         System.out.println("Débit");
                     }else{
                         System.out.println("Crédit");
                     }
 
                     System.out.print("\nPrix de la location par jour       ");
-                    if(choixOptionTypeVoiture.equals(PETIT_H)){
-                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                    if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
+                        if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_PETIT);
                             montantLocationChoisie = LOCATION_HYBRIDE_PETIT;                          
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_INTERMEDIAIRE);
                             montantLocationChoisie = LOCATION_HYBRIDE_INTERMEDIAIRE;                          
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_GRAND)){
                             System.out.printf("%.2f$", LOCATION_HYBRIDE_GRAND);
                             montantLocationChoisie = LOCATION_HYBRIDE_GRAND;                          
                         }
-                    }else if((choixOptionTypeVoiture.equals(PETIT_E))){
-                        if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                    }else if((choixOptionTypeVoiture.equals(VEHICULE_ELECTRIQUE))){
+                        if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_PETIT);
                             montantLocationChoisie = LOCATION_ELECTRIQUE_PETIT;
                             sousTotalLocation = LOCATION_ELECTRIQUE_PETIT * choixJoursLocation;
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_INTERMEDIAIRE);
                             montantLocationChoisie = LOCATION_ELECTRIQUE_INTERMEDIAIRE;
-                        }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                        }else if(choixOptionGrandeurVoiture.equals(VEHICULE_GRAND)){
                             System.out.printf("%.2f$", LOCATION_ELECTRIQUE_GRAND);
                             montantLocationChoisie = LOCATION_ELECTRIQUE_GRAND;
                         }
@@ -366,25 +366,25 @@ public class FacturationRoulonsVehiculesVerts
                     switch(choixAssurance){
 
                         case "o": 
-                            if(choixOptionTypeVoiture.equals(PETIT_H)){
-                                if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
+                                if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                                     System.out.printf("%.2f$", ASSURANCE_HYBRIDE_PETIT);  
                                     prixAssurance = ASSURANCE_HYBRIDE_PETIT;
-                                }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                                }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                                     System.out.printf("%.2f$", ASSURANCE_HYBRIDE_INTERMEDIAIRE);   
                                     prixAssurance = ASSURANCE_HYBRIDE_INTERMEDIAIRE;
-                                }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                                }else if(choixOptionGrandeurVoiture.equals(VEHICULE_GRAND)){
                                     System.out.printf("%.2f$", ASSURANCE_HYBRIDE_GRAND); 
                                     prixAssurance = ASSURANCE_HYBRIDE_GRAND;
                                 }
-                            }else if((choixOptionTypeVoiture.equals(PETIT_E))){
-                                if(choixOptionGrandeurVoiture.equals(PETIT_P)){
+                            }else if((choixOptionTypeVoiture.equals(VEHICULE_ELECTRIQUE))){
+                                if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                                     System.out.printf("%.2f$", ASSURANCE_ELECTRIQUE_PETIT);
                                     prixAssurance = ASSURANCE_ELECTRIQUE_PETIT;
-                                }else if(choixOptionGrandeurVoiture.equals(PETIT_I)){
+                                }else if(choixOptionGrandeurVoiture.equals(VEHICULE_INTERMEDIAIRE)){
                                     System.out.printf("%.2f$", ASSURANCE_ELECTRIQUE_INTERMEDIAIRE);
                                     prixAssurance = ASSURANCE_ELECTRIQUE_INTERMEDIAIRE;
-                                }else if(choixOptionGrandeurVoiture.equals(PETIT_G)){
+                                }else if(choixOptionGrandeurVoiture.equals(VEHICULE_GRAND)){
                                     System.out.printf("%.2f$", ASSURANCE_ELECTRIQUE_GRAND);
                                     prixAssurance = ASSURANCE_ELECTRIQUE_GRAND;
                                 }
@@ -395,16 +395,15 @@ public class FacturationRoulonsVehiculesVerts
                             System.out.printf("%.2f$", prixAssurance);
                             break;
                     }
-                    
+
                     if(choixJoursLocation > 15){
-                        montantRabaisLocation = montantLocationChoisie * pourcentageRabaisLocation;
+                        montantRabaisLocation = montantLocationChoisie * POURCENTAGE_RABAIS_LOCATION;
                         sousTotalLocation = ( montantLocationChoisie * choixJoursLocation ) - ( montantRabaisLocation * choixJoursLocation); 
                         System.out.printf("\n%-34s %.2f$", MESSAGE_RABAIS_LOCATION, montantRabaisLocation);
                     }else{
                         sousTotalLocation = montantLocationChoisie * choixJoursLocation;
                     }
-                    
-                    
+
                     
                     System.out.printf("\n\n%-34s %.2f$", MESSAGE_MONTANT_LOCATION_SOUS_TOTAL, sousTotalLocation);
                     prixAssuranceFoisJours = prixAssurance*choixJoursLocation;
@@ -420,6 +419,8 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(MESSAGE_REMERCIEMENT);                            
                     break;
+                    
+                //Afficher les voitures louées
                 case 3:
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(NOM_ENTREPRISE);
@@ -437,13 +438,15 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.printf("\nGrand %15d %15d\n\n", voituresLouesHybridesGrandes, voituresLouesElectriquesGrandes);
                     System.out.println(ENCADRE_SOUS_TIRE);
                     break;
+                    
+                // Quitter le programme
                 case 4:
                     System.out.println("\n\nMerci et à la prochaine !");
                     System.exit(0);
 
             } 
-            
-            //watermark This is Love-Mary's work and no one else's. I cried too much on this.
+            //Revenir au menu principal
+            //watermark This is Love's work and no one else's. I cried too much on this.
             System.out.println("\n\nAppuyer sur <ENTREE> pour réafficher le menu...");
             Clavier.lireFinLigne();
             isPressed = true;

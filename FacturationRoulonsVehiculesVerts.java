@@ -12,6 +12,7 @@
  * @author Love-Mary Victor (VICL12599701, CJ490809)
  * @version : 9 Février, 2025
  * @github : https://github.com/LoveyouMaryme/TP1/blame/master/FacturationRoulonsVehiculesVerts.java
+ * @code_permanent : 
  */
 
 // Importing LocalDateTime and DateTimeFormatter 
@@ -193,6 +194,8 @@ public class FacturationRoulonsVehiculesVerts
                     
                 // Louer une voiture selon sa taille, son type, sa disponibilité et valider les modalités de paiement
                 case 2:
+                    
+                    //Choix du type de véhicule à louer et gestion des erreurs
                     System.out.println("\nEntrez le type du véhicule à louer");
                     System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :     ");
                     choixOptionTypeVoiture = Clavier.lireString().toLowerCase();
@@ -205,6 +208,8 @@ public class FacturationRoulonsVehiculesVerts
 
                     }
 
+                    
+                    // Choix de la grandeur du véhicule à louet et gestion des erreurs
                     System.out.println("\nEntrez la grandeur du véhicule à louer");
                     System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :    ");
                     choixOptionGrandeurVoiture = Clavier.lireString().toLowerCase();
@@ -217,7 +222,8 @@ public class FacturationRoulonsVehiculesVerts
                     }
 
                     System.out.println("");
-
+                    
+                    //Gestion de choix du véhicule et gestion de l'inventaire
                     if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
                         if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesPetites;
@@ -248,6 +254,7 @@ public class FacturationRoulonsVehiculesVerts
                         }
                     }
 
+                    // Retour au menu si voiture choisie n'est pas disponible
                     if(nombreVoituresChoisiesRestantes != 0){
                         System.out.println(nombreVoituresChoisiesRestantes + " véhicules de ce type et de cette grandeur sont disponibles !\n");
                     }else{
@@ -255,6 +262,7 @@ public class FacturationRoulonsVehiculesVerts
                         break;
                     }
 
+                    // Choix du nombre de jour et gestion des erreurs si inférieur à 0 ou supérieur à 30
                     System.out.println("Entrez le nombre de jours de location");
                     System.out.print("(supérieur à 0 et inférieur ou égal à 30) :    ");
                     choixJoursLocation = Clavier.lireInt();
@@ -267,6 +275,7 @@ public class FacturationRoulonsVehiculesVerts
 
                     }
 
+                    //Entrer les informations du client
                     System.out.print("\nEntrez le prénom du locataire :    ");
                     prenomLocataire = Clavier.lireString();
                     System.out.print("\nEntrez le nom du locataire :     ");
@@ -276,6 +285,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.print("\nEntrez le numéro de permis de conduire du locataire :     ");
                     permisConduiteLocataire = Clavier.lireString();
 
+                    //Information des cartes de paiement et gestion des erreurs
                     System.out.println("\nEntrez le mode de paiement");
                     System.out.print("(D ou d pour Débit, C ou c pour Crédit): ");
                     modePaiement = Clavier.lireString().toLowerCase();
@@ -305,6 +315,7 @@ public class FacturationRoulonsVehiculesVerts
                         numeroCarteCredit = Clavier.lireString().toLowerCase();
                     }
 
+                    //Choix des assurances et gestion des erreurs
                     System.out.println("\nDésirez-vous prendre l'assurance");
                     System.out.print("(O ou o pour Oui, N ou n pour Non) ? :    ");
                     choixAssurance = Clavier.lireString().toLowerCase();
@@ -316,6 +327,8 @@ public class FacturationRoulonsVehiculesVerts
                         choixAssurance = Clavier.lireString().toLowerCase();
                     }
 
+                    //Écriture de la facture pour le client
+                        //Information du client
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(NOM_ENTREPRISE);
                     System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
@@ -328,7 +341,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("\nPrénom et nom : " +  prenomLocataire + " " + nomLocataire);
                     System.out.println("Téléphone : " + telephoneLocataire);
                     System.out.println("Permis de conduire : " + permisConduiteLocataire);
-
+                        // Information de la voiture louée
                     System.out.print("\nType de véhicule : ");
                     if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
                         System.out.println("Hybride");
@@ -343,13 +356,13 @@ public class FacturationRoulonsVehiculesVerts
                     }else{
                         System.out.println("Grand");
                     }
-
+                        // Dates de début et de retour du location
                     System.out.println("\nNombre de jours de location : " + choixJoursLocation);
                     System.out.println("Date de location : " + dateLocationFormate);
 
                     dateRetourFormate = now.plusHours(3).plusDays(choixJoursLocation).format(FORMATTER);
                     System.out.println("Date de retour   : " +  dateRetourFormate); 
-
+                        // Mode de paiement
                     System.out.print("\nMode de paiement : ");
                     if(modePaiement.equals(CARTE_DEBIT)){
                         System.out.println("Débit");
@@ -357,6 +370,7 @@ public class FacturationRoulonsVehiculesVerts
                         System.out.println("Crédit");
                     }
 
+                        // Prix de la location de la voiture en tenant en compte des assurances et des rabais
                     System.out.print("\nPrix de la location par jour       ");
                     if(choixOptionTypeVoiture.equals(VEHICULE_HYBRIDE)){
                         if(choixOptionGrandeurVoiture.equals(VEHICULE_PETIT)){
@@ -424,7 +438,7 @@ public class FacturationRoulonsVehiculesVerts
                         sousTotalLocation = montantLocationChoisie * choixJoursLocation;
                     }
 
-                    
+                        //Affichage des informations de la facture
                     System.out.printf("\n\n%-34s %.2f$", MESSAGE_MONTANT_LOCATION_SOUS_TOTAL, sousTotalLocation);
                     prixAssuranceFoisJours = prixAssurance*choixJoursLocation;
                     System.out.printf("\n%-34s %.2f$", MESSAGE_MONTANT_ASSURANCE, prixAssuranceFoisJours);

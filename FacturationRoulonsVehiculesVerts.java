@@ -192,20 +192,20 @@ public class FacturationRoulonsVehiculesVerts
                     //Choix du type de véhicule à louer et gestion des erreurs
                     System.out.println("\nEntrez le type du véhicule à louer");
                     System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :     ");
-                    choixOptionTypeVoiture = Character.toLowerCase(Clavier.lireChar());
+                    choixOptionTypeVoiture = Character.toLowerCase(Clavier.lireCharLn());
 
                     while(  choixOptionTypeVoiture != VEHICULE_HYBRIDE && choixOptionTypeVoiture != VEHICULE_ELECTRIQUE){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez le type du véhicule à louer");
                         System.out.print("(H ou h pour Hybride, et E ou e pour Électrique) :    ");
-                        choixOptionTypeVoiture = Character.toLowerCase(Clavier.lireChar());
+                        choixOptionTypeVoiture = Character.toLowerCase(Clavier.lireCharLn());
 
                     }
 
                     // Choix de la grandeur du véhicule à louet et gestion des erreurs
                     System.out.println("\nEntrez la grandeur du véhicule à louer");
                     System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :    ");
-                    choixOptionGrandeurVoiture = Character.toLowerCase(Clavier.lireChar());
+                    choixOptionGrandeurVoiture = Character.toLowerCase(Clavier.lireCharLn());
 
                     while(choixOptionGrandeurVoiture != VEHICULE_PETIT   && 
                     choixOptionGrandeurVoiture != VEHICULE_INTERMEDIAIRE && 
@@ -213,7 +213,7 @@ public class FacturationRoulonsVehiculesVerts
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez la grandeur du véhicule à louer");
                         System.out.print("(P ou p pour Petit, I ou i pour Intermédiaire, et G ou g pour Grand) :     ");
-                        choixOptionGrandeurVoiture = Character.toLowerCase(Clavier.lireChar());
+                        choixOptionGrandeurVoiture = Character.toLowerCase(Clavier.lireCharLn());
                     }
 
                     System.out.println("");
@@ -283,26 +283,26 @@ public class FacturationRoulonsVehiculesVerts
                     //Information des cartes de paiement et gestion des erreurs
                     System.out.println("\nEntrez le mode de paiement");
                     System.out.print("(D ou d pour Débit, C ou c pour Crédit): ");
-                    modePaiement = Character.toLowerCase(Clavier.lireChar());
+                    modePaiement = Character.toLowerCase(Clavier.lireCharLn());
 
                     while( modePaiement != CARTE_DEBIT && modePaiement != CARTE_CREDIT){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Entrez le mode de paiement");
                         System.out.print("(D ou d pour Débit, C ou c pour Crédit):    ");
-                        modePaiement = Character.toLowerCase(Clavier.lireChar());
+                        modePaiement = Character.toLowerCase(Clavier.lireCharLn());
 
                     }
 
                     if(modePaiement==CARTE_CREDIT){
                         System.out.println("\nEntrez le type de la carte de crédit");
                         System.out.print("(V ou v pour Visa, et M ou m pour MasterCard): ");
-                        typeCarteCredit = Character.toLowerCase(Clavier.lireChar());
+                        typeCarteCredit = Character.toLowerCase(Clavier.lireCharLn());
 
                         while( typeCarteCredit != VISA_CARTE_CREDIT &&  typeCarteCredit != MC_CARTE_CREDIT){
                             System.out.println("\nEntrée invalide !\n");
                             System.out.println("\nEntrez le type de la carte de crédit");
                             System.out.print("(V ou v pour Visa, et M ou m pour MasterCard): ");
-                            typeCarteCredit = Character.toLowerCase(Clavier.lireChar());
+                            typeCarteCredit = Character.toLowerCase(Clavier.lireCharLn());
 
                         } 
 
@@ -313,13 +313,13 @@ public class FacturationRoulonsVehiculesVerts
                     //Choix des assurances et gestion des erreurs
                     System.out.println("\nDésirez-vous prendre l'assurance");
                     System.out.print("(O ou o pour Oui, N ou n pour Non) ? :    ");
-                    choixAssurance = Character.toLowerCase(Clavier.lireChar());
+                    choixAssurance = Character.toLowerCase(Clavier.lireCharLn());
 
                     while( choixAssurance != ASSURANCE_OUI && choixAssurance != ASSURANCE_NON){
                         System.out.println("\nEntrée invalide !\n");
                         System.out.println("Désirez-vous prendre l'assurance");
                         System.out.print("(O ou o pour Oui, N ou n pour Non) ? :    ");
-                        choixAssurance = Character.toLowerCase(Clavier.lireChar());
+                        choixAssurance = Character.toLowerCase(Clavier.lireCharLn());
                     }
 
                     //Écriture de la facture pour le client

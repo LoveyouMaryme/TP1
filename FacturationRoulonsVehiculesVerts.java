@@ -24,7 +24,7 @@ public class FacturationRoulonsVehiculesVerts
     public static void main(String [] args)
 
     {
-        // Déclaration de constantes
+        // Déclaration de constantes //
         //Messages affichés
         final String NOM_ENTREPRISE = "Roulons les Véhicules Verts (RVV)";
         final String MESSAGE_BIENVENUE = "Bienvenue dans le système de facturation de " + NOM_ENTREPRISE;
@@ -90,7 +90,7 @@ public class FacturationRoulonsVehiculesVerts
         final float PERCENTAGE_TVQ = 0.09975f;
         final float POURCENTAGE_RABAIS_LOCATION = 0.20f;
 
-        // Déclaration de variables
+        // Déclaration de variables //
 
         // Inventaire des voitures
         int voituresLouesHybridesPetites = 0;
@@ -105,7 +105,7 @@ public class FacturationRoulonsVehiculesVerts
         int voituresRestantesElectriquesIntermediaires = 9;
         int voituresLouesElectriquesGrandes = 0;
         int voituresRestantesElectriquesGrandes = 5;
-            
+
         int nombreVoituresChoisiesRestantes;
 
         // Choix du client
@@ -144,7 +144,7 @@ public class FacturationRoulonsVehiculesVerts
         float montantTvq;
         float montantTotal;
 
-        // Affichage de résultat
+        // Affichage de résultat //
         System.out.println(ENCADRE_TITRE);
         System.out.println(MESSAGE_BIENVENUE);
         System.out.println(ENCADRE_TITRE + "\n");
@@ -344,6 +344,7 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("\nPrénom et nom : " +  prenomLocataire + " " + nomLocataire);
                     System.out.println("Téléphone : " + telephoneLocataire);
                     System.out.println("Permis de conduire : " + permisConduiteLocataire);
+
                     // Information de la voiture louée
                     System.out.print("\nType de véhicule : ");
                     if(choixOptionTypeVoiture == VEHICULE_HYBRIDE){
@@ -359,12 +360,14 @@ public class FacturationRoulonsVehiculesVerts
                     }else{
                         System.out.println("Grand");
                     }
+
                     // Dates de début et de retour du location
                     System.out.println("\nNombre de jours de location : " + choixJoursLocation);
                     System.out.println("Date de location : " + dateLocationFormate);
 
                     dateRetourFormate = now.plusHours(3).plusDays(choixJoursLocation).format(FORMATTER);
                     System.out.println("Date de retour   : " +  dateRetourFormate); 
+
                     // Mode de paiement
                     System.out.print("\nMode de paiement : ");
                     if(modePaiement == CARTE_DEBIT){

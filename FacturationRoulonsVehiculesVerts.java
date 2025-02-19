@@ -97,8 +97,8 @@ public class FacturationRoulonsVehiculesVerts
         int voituresRestantesHybridesPetites = 12;
         int voituresLouesHybridesIntermediaires = 0;
         int voituresRestantesHybridesIntermediaires = 10;
-        int voituresLouesHybridesGrandes = 3;
-        int voituresRestantesHybridesGrandes = 0;
+        int voituresLouesHybridesGrandes = 0;
+        int voituresRestantesHybridesGrandes = 3;
         int voituresLouesElectriquesPetites = 0;
         int voituresRestantesElectriquesPetites = 11;
         int voituresLouesElectriquesIntermediaires = 0;

@@ -106,8 +106,7 @@ public class FacturationRoulonsVehiculesVerts
         int voituresLouesElectriquesGrandes = 0;
         int voituresRestantesElectriquesGrandes = 5;
             
-            //Valeur par défaut qui sera sûrement écrasé selon les options choises par le client
-        int nombreVoituresChoisiesRestantes = voituresRestantesHybridesPetites;
+        int nombreVoituresChoisiesRestantes;
 
         // Choix du client
         char choixOptionTypeVoiture;

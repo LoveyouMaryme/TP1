@@ -9,10 +9,10 @@
  *  4. Regarder le nombre de voitures louées
  *  5. Sortir du programme
  *
- * @author Love-Mary Victor (VICL12599701, CJ490809)
- * @version : 9 Février, 2025
+ * @author Love-Mary Victor (CJ490809)
+ * @version : 18 Février, 2025
  * @github : https://github.com/LoveyouMaryme/TP1/blame/master/FacturationRoulonsVehiculesVerts.java
- * @code_permanent : 
+ * @code_permanent : VICL12599701
  */
 
 // Importing LocalDateTime and DateTimeFormatter 
@@ -41,6 +41,7 @@ public class FacturationRoulonsVehiculesVerts
         final String MESSAGE_MONTANT_LOCATION_SOUS_TOTAL = "Montant de la location";
         final String MESSAGE_MONTANT_ASSURANCE = "Montant de l'assurance";
         final String MESSAGE_NOMBRE_VEHICULE_INVENTAIRE = "Nombre de véhicules disponibles dans l'inventaire";
+        final String MESSAGE_NOMBRE_VEHICULE_LOUEE = "Nombre de véhicules loués par type et par catégorie";
         final String MESSAGE_SOUS_TOTAL = "Sous-total";
         final String MESSAGE_MONTANT_TPS = "Montant TPS";
         final String MESSAGE_MONTANT_TVQ = "Montant TVQ";
@@ -96,16 +97,17 @@ public class FacturationRoulonsVehiculesVerts
         int voituresRestantesHybridesPetites = 12;
         int voituresLouesHybridesIntermediaires = 0;
         int voituresRestantesHybridesIntermediaires = 10;
-        int voituresLouesHybridesGrandes = 0;
-        int voituresRestantesHybridesGrandes = 3;
+        int voituresLouesHybridesGrandes = 3;
+        int voituresRestantesHybridesGrandes = 0;
         int voituresLouesElectriquesPetites = 0;
         int voituresRestantesElectriquesPetites = 11;
         int voituresLouesElectriquesIntermediaires = 0;
         int voituresRestantesElectriquesIntermediaires = 9;
         int voituresLouesElectriquesGrandes = 0;
         int voituresRestantesElectriquesGrandes = 5;
-
-        int nombreVoituresChoisiesRestantes;
+            
+            //Valeur par défaut qui sera sûrement écrasé selon les options choises par le client
+        int nombreVoituresChoisiesRestantes = voituresRestantesHybridesPetites;
 
         // Choix du client
         char choixOptionTypeVoiture;
@@ -219,33 +221,40 @@ public class FacturationRoulonsVehiculesVerts
                     System.out.println("");
 
                     //Gestion de choix du véhicule et gestion de l'inventaire
+
                     if(choixOptionTypeVoiture == VEHICULE_HYBRIDE){
                         if(choixOptionGrandeurVoiture == VEHICULE_PETIT){
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesPetites;
-                            voituresLouesHybridesPetites++;
-                            voituresRestantesHybridesPetites--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesHybridesPetites++;
+                                voituresRestantesHybridesPetites--;}
                         }else if(choixOptionGrandeurVoiture == VEHICULE_INTERMEDIAIRE ){
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesIntermediaires;
-                            voituresLouesHybridesIntermediaires++;
-                            voituresRestantesHybridesIntermediaires--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesHybridesIntermediaires++;
+                                voituresRestantesHybridesIntermediaires--;}
                         }else{
                             nombreVoituresChoisiesRestantes = voituresRestantesHybridesGrandes;
-                            voituresLouesHybridesGrandes++;
-                            voituresRestantesHybridesGrandes--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesHybridesGrandes++;
+                                voituresRestantesHybridesGrandes--;}
                         }
                     }else{
                         if(choixOptionGrandeurVoiture == VEHICULE_PETIT){
                             nombreVoituresChoisiesRestantes = voituresRestantesElectriquesPetites;
-                            voituresLouesElectriquesPetites++;
-                            voituresRestantesElectriquesPetites--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesElectriquesPetites++;
+                                voituresRestantesElectriquesPetites--;}
                         }else if(choixOptionGrandeurVoiture == VEHICULE_INTERMEDIAIRE ){
                             nombreVoituresChoisiesRestantes = voituresRestantesElectriquesIntermediaires;
-                            voituresLouesElectriquesIntermediaires++;
-                            voituresRestantesElectriquesIntermediaires--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesElectriquesIntermediaires++;
+                                voituresRestantesElectriquesIntermediaires--;}
                         }else{
                             nombreVoituresChoisiesRestantes = voituresRestantesElectriquesGrandes;
-                            voituresLouesElectriquesGrandes++;
-                            voituresRestantesElectriquesGrandes--;
+                            if(nombreVoituresChoisiesRestantes > 0){
+                                voituresLouesElectriquesGrandes++;
+                                voituresRestantesElectriquesGrandes--;}
                         }
                     }
 
@@ -326,8 +335,8 @@ public class FacturationRoulonsVehiculesVerts
                     //Information du client
                     System.out.println("\n" + ENCADRE_SOUS_TIRE);
                     System.out.println(NOM_ENTREPRISE);
-                    System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Téléphone :     " + TELEPHONE_ENTREPRISE);
+                    System.out.println("Adresse :       " + ADRESSE_ENTREPRISE);
                     System.out.println("Date et Heure : " + dateNowFormate);
                     nombreFacture++;
                     System.out.println("Facture No :    " + nombreFacture);
